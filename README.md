@@ -1,4 +1,4 @@
-# silicondb
+# 💽 silicondb
 
 A concurrent key value store, column oriented database and more.
 
