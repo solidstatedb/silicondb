@@ -1,8 +1,28 @@
-# 💽 silicondb
-
-![build-and-test-workflow](https://github.com/arindas/silicondb/actions/workflows/build-and-test.yml/badge.svg)
-
+# silicondb
 A concurrent key value store, column oriented database and more.
+
+<p align="center">
+    <img src="./.github/logo.jpg" alt="silicondb" width="300" />   
+</p>
+
+<p align="center">
+    <a href="https://github.com/arindas/silicondb/actions"><img src="https://github.com/arindas/silicondb/workflows/build-and-test/badge.svg" alt="Build Status"></a>
+</p>
+
+## Overview
+
+silicondb was a project created to understand how modern NoSQL scalable distributed databases work. In particular
+the author intends to learn implementing lock free data structures, log structured merge trees,
+column-oriented data storage, merkle trees and data replication at scale.
+
+This project doesn't aim to compete with existing NoSQL databases, neither does it provided any novel feature
+addressing a particular pain point. It does however provide implementations of wait-free simulated lock free
+data structures. (See references)
+
+However, this project still aims to be a scalable, robust alternative to modern databases with production level code.
+
+silicondb prioritizes efficiency on SSDs. Hence we focus on log structures merge trees as the driving data
+storage data structure instead of b-trees.
 
 ## 💻 Storage Engine modules
 
@@ -44,6 +64,13 @@ cd build && ctest
 ```
 
 This should run all tests.
+
+## License
+
+`silicondb` is licensed under the MIT License See [LICENSE](./LICENSE) for the full license text.
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Farindas%2Fsilicondb.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Farindas%2Fsilicondb?ref=badge_large)
+
 
 ## 📖 References
 - [Book] C++ Concurrency in Action - Anthony Williams - Manning Publications. ISBN: 978-1-933-98877-1
