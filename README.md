@@ -1,6 +1,6 @@
 # 💽 silicondb
 
-[build-and-test-workfliw](https://github.com/arindas/silicondb/actions/workflows/build-and-test.yml/badge.svg)
+[build-and-test-workflow](https://github.com/arindas/silicondb/actions/workflows/build-and-test.yml/badge.svg)
 
 A concurrent key value store, column oriented database and more.
 
