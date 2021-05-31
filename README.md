@@ -21,7 +21,7 @@ data structures. (See references)
 
 However, this project still aims to be a scalable, robust alternative to modern databases with production level code.
 
-silicondb prioritizes efficiency on SSDs. Hence we focus on log structures merge trees as the driving data
+silicondb prioritizes efficiency on SSDs. Hence we focus on log structured merge trees as the driving data
 storage data structure instead of b-trees.
 
 ## 💻 Storage Engine modules
