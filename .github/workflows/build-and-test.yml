@@ -6,5 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: cmake --version
-      - run: cmake -S . -B build/
-      - run: cd build && ctest
+      - run: mkdir build && cd build
+      - run: cmake ..
+      - run: make
+      - run: ctest
