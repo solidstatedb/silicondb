@@ -1,5 +1,5 @@
-#ifndef SILICONDB_H
-#define SILICONDB_H
+#ifndef SILICONDB_HELLO_H
+#define SILICONDB_HELLO_H
 
 #include <iostream>
 

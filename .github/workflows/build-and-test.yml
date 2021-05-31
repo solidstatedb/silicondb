@@ -1,0 +1,23 @@
+name: build-and-test
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - include/**
+      - silcondb/**
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - include/**
+      - silicondb/**
+jobs:
+  build-and-test-using-cmake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cmake --version
+      - run: mkdir build && cd build && cmake .. && make && ctest
