@@ -33,7 +33,7 @@ namespace silicondb
             // map::bucket::find_entry_for: returns a iterator to the first
             // (key, value) pair within this buckets data list with given
             // argument key.
-            bucket_iterator find_entry_for(Key const &key) const
+            bucket_iterator find_entry_for(Key const &key)
             {
                 return std::find_if(data.begin(), data.end(),
                                     [&](bucket_value const &item)
@@ -43,7 +43,7 @@ namespace silicondb
         public:
             // map::bucket::get: returns the value mapped to the given key
             // if present, the default_value passed otherwise
-            Value get(Key const &key, Value const &default_value) const
+            Value get(Key const &key, Value const &default_value)
             {
                 std::shared_lock<std::shared_mutex> lock(mutex);
                 bucket_iterator const entry = find_entry_for(key);
