@@ -26,7 +26,7 @@ storage data structure instead of b-trees.
 
 ## 💻 Storage Engine modules
 
-- [ ] A concurrent in memory map implemented as a hashtable.
+- [x] A concurrent in memory map implemented as a hashtable.
 - [ ] A lock-free variant of the map mentioned above.
 - [ ] A wait-free simulation of the lock-free map.
 - [ ] A lock-free concurrent SSTable simulated in a wait-free manner.
