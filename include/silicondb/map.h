@@ -56,7 +56,7 @@ namespace silicondb
             // overwrites the old mapping with the new value.
             void put(Key const &key, Value const &value)
             {
-                std::shared_lock<std::shared_mutex> lock(mutex);
+                std::unique_lock<std::shared_mutex> lock(mutex);
                 bucket_iterator const entry = find_entry_for(key);
 
                 if (entry == data.end())
@@ -69,7 +69,7 @@ namespace silicondb
             // key, if present, from the bucket data.
             void unmap(Key const &key)
             {
-                std::shared_lock<std::shared_mutex> lock(mutex);
+                std::unique_lock<std::shared_mutex> lock(mutex);
                 bucket_iterator const entry = find_entry_for(key);
 
                 if (entry != data.end())
