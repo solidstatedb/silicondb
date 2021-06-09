@@ -8,14 +8,107 @@ template <typename integer_map>
 void test_map_consistency_serial(integer_map &map)
 {
     for (int i = 0; i < 10; i++)
-    {
         map.put(i, i + 1);
-    }
 
     for (int i = 0; i < 10; i++)
-    {
         EXPECT_EQ(map.get(i), i + 1);
+}
+
+template <typename integer_map>
+void test_map_unmap_serial(integer_map &map)
+{
+    for (int i = 1; i <= 10; i++)
+        map.put(i, i);
+
+    for (int i = 1; i <= 10; i++)
+    {
+        if (i % 2 == 0)
+            map.unmap(i);
     }
+
+    for (int i = 1; i <= 10; i++)
+    {
+        if (i % 3 == 0)
+            map.unmap(i);
+    }
+
+    for (int i = 1; i <= 10; i++)
+    {
+        if (i % 2 == 0 || i % 3 == 0)
+        {
+            EXPECT_EQ(map.contains(i), false);
+        }
+        else
+        {
+            EXPECT_EQ(map.contains(i), true);
+            EXPECT_EQ(map.get(i), i);
+        }
+    }
+
+    for (int i = 11; i <= 15; i++)
+        EXPECT_EQ(map.contains(i), false);
+}
+
+template <typename integer_map>
+void test_map_unmap(integer_map &map)
+{
+    using namespace std::chrono_literals;
+
+    // random sleep durations
+    auto d1 = 29ms, d2 = 53ms;
+
+    for (int i = 1; i <= 10; i++)
+        map.put(i, i);
+
+    std::thread unmap_thread_1([&]()
+                               {
+                                   for (int i = 1; i <= 10; i++)
+                                   {
+                                       std::this_thread::sleep_for(d1);
+                                       if (i % 2 == 0)
+                                           map.unmap(i);
+                                   }
+                               });
+
+    std::thread unmap_thread_2([&]()
+                               {
+                                   for (int i = 1; i <= 10; i++)
+                                   {
+                                       std::this_thread::sleep_for(d2);
+                                       if (i % 3 == 0)
+                                           map.unmap(i);
+                                   }
+                               });
+
+    unmap_thread_1.join();
+    unmap_thread_2.join();
+
+    auto read_thread_task = [&]()
+    {
+        for (int i = 1; i <= 10; i++)
+        {
+            if (i % 2 == 0 || i % 3 == 0)
+            {
+                std::this_thread::sleep_for(d2);
+                EXPECT_EQ(map.contains(i), false);
+            }
+            else
+            {
+                std::this_thread::sleep_for(d1);
+                EXPECT_EQ(map.contains(i), true);
+                EXPECT_EQ(map.get(i), i);
+            }
+        }
+
+        for (int i = 11; i <= 15; i++)
+            EXPECT_EQ(map.contains(i), false);
+    };
+
+    std::thread reader_thread_1(read_thread_task);
+    std::thread reader_thread_2(read_thread_task);
+
+    reader_thread_1.join();
+    reader_thread_2.join();
 }
 
 template <typename integer_map>
@@ -77,8 +170,26 @@ void test_map_consistency(integer_map &map)
 
 TEST(MapTestSerial, Consistent)
 {
-    silicondb::map<int, int> map;
+    // arbitrary small number of buckets
+    // to increase hash collisions.
+    silicondb::map<int, int> map(3);
     test_map_consistency_serial(map);
+}
+
+TEST(MapTestSerial, UnmapTest)
+{
+    // arbitrary small number of buckets
+    // to increase hash collisions.
+    silicondb::map<int, int> map(3);
+    test_map_unmap_serial(map);
+}
+
+TEST(MapTest, UnmapTest)
+{
+    // arbitrary small number of buckets
+    // to increase hash collisions.
+    silicondb::map<int, int> map(3);
+    test_map_unmap(map);
 }
 
 TEST(MapTest, Constructs)
@@ -88,6 +199,8 @@ TEST(MapTest, Constructs)
 
 TEST(MapTest, Consistent)
 {
-    silicondb::map<int, int> map;
+    // arbitrary small number of buckets
+    // to increase hash collisions.
+    silicondb::map<int, int> map(3);
     test_map_consistency(map);
 }
