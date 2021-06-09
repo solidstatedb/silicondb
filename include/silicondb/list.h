@@ -18,13 +18,12 @@ namespace silicondb
     private:
         // list::node: node in a linked list. Every node contains a unique pointer
         // to the next node, thereby having sole ownership of the next node.
-        // Furthermore, every node contains a mutex to enable unique (read/write)
-        // lock on the sub-list starting from that node.
+        // Furthermore, every node contains a mutex. This mutex acts as a locked
+        // gate, which lets threads pass through it when unlocked.
         struct node
         {
             std::unique_ptr<node> next; // unique ownership of the next pointer
-            std::shared_mutex subl_mtx; // mutex to lock on the sublist starting
-                                        // from this node
+            std::shared_mutex mtx;      // mutex to act as a locked gate.
 
             std::shared_ptr<T> data; // shared ownership of data with pointer
 
@@ -50,7 +49,7 @@ namespace silicondb
         void push_front(T const &value)
         {
             std::unique_ptr<node> node_created{new node(value)};
-            std::lock_guard<std::shared_mutex> lk(head.subl_mtx);
+            std::unique_lock<std::shared_mutex> lk(head.mtx);
 
             node_created->next = std::move(head.next);
             head.next = std::move(node_created);
@@ -60,11 +59,11 @@ namespace silicondb
         void remove_if(Predicate p)
         {
             node *current = &head;
-            std::unique_lock<std::shared_mutex> lk(head.subl_mtx);
+            std::unique_lock<std::shared_mutex> lk(head.mtx);
 
             while (node *const next = current->next.get())
             {
-                std::unique_lock<std::shared_mutex> next_lk(next->subl_mtx);
+                std::unique_lock<std::shared_mutex> next_lk(next->mtx);
                 if (p(*next->data))
                 {
                     std::unique_ptr<node> old_next = std::move(current->next);
@@ -84,11 +83,11 @@ namespace silicondb
         void for_each(Function f)
         {
             node *current = &head;
-            std::shared_lock<std::shared_mutex> lk(head.subl_mtx);
+            std::shared_lock<std::shared_mutex> lk(head.mtx);
 
             while (node *const next = current->next.get())
             {
-                std::shared_lock<std::shared_mutex> next_lk(next->subl_mtx);
+                std::shared_lock<std::shared_mutex> next_lk(next->mtx);
                 lk.unlock();
 
                 f(*next->data);
@@ -102,11 +101,11 @@ namespace silicondb
         std::shared_ptr<T> find_first_if(Predicate p)
         {
             node *current = &head;
-            std::shared_lock<std::shared_mutex> lk(head.subl_mtx);
+            std::shared_lock<std::shared_mutex> lk(head.mtx);
 
             while (node *const next = current->next.get())
             {
-                std::shared_lock<std::shared_mutex> next_lk(next->subl_mtx);
+                std::shared_lock<std::shared_mutex> next_lk(next->mtx);
                 lk.unlock();
 
                 if (p(*next->data))
