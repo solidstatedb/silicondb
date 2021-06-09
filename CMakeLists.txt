@@ -26,3 +26,6 @@ link_libraries(gtest_main)
 
 add_executable(map_test test/map.cc)
 gtest_discover_tests(map_test)
+
+add_executable(list_test test/list.cc)
+gtest_discover_tests(list_test)
