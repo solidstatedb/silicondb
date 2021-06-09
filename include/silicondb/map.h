@@ -3,12 +3,7 @@
 
 #include <functional>
 #include <vector>
-#include <list>
-
 #include <memory>
-
-#include <shared_mutex>
-#include <mutex>
 
 #include <silicondb/list.h>
 
