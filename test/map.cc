@@ -5,6 +5,20 @@
 #include <chrono>
 
 template <typename integer_map>
+void test_map_consistency_serial(integer_map &map)
+{
+    for (int i = 0; i < 10; i++)
+    {
+        map.put(i, i + 1);
+    }
+
+    for (int i = 0; i < 10; i++)
+    {
+        EXPECT_EQ(map.get(i), i + 1);
+    }
+}
+
+template <typename integer_map>
 void test_map_consistency(integer_map &map)
 {
     using namespace std::chrono_literals;
@@ -59,6 +73,12 @@ void test_map_consistency(integer_map &map)
 
     get_thread_1.join();
     get_thread_2.join();
+}
+
+TEST(MapTestSerial, Consistent)
+{
+    silicondb::map<int, int> map;
+    test_map_consistency_serial(map);
 }
 
 TEST(MapTest, Constructs)
