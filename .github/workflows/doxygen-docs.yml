@@ -16,7 +16,7 @@ jobs:
         run: wget https://doxygen.nl/files/doxygen-1.9.1.src.tar.gz
       
       - name: Build doxygen
-        run: mkdir doxy-build && cd doxy-build && cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -Wno-dev .. && make && sudo make install
+        run: mkdir doxy-build && cd doxy-build && cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/ -Wno-dev .. && make && sudo make install
 
       - name: Build documentation
         run: cd docs && doxygen
