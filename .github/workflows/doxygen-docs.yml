@@ -12,8 +12,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       
-      - name: Install doxygen
-        run: sudo apt install doxygen
+      - name: Download doxygen sources
+        run: wget https://doxygen.nl/files/doxygen-1.9.1.src.tar.gz
+      
+      - name: Build doxygen
+        run: tar xzf doxygen-1.9.1.src.tar.gz && cd doxygen-1.9.1 && mkdir build && cd build && cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -Wno-dev .. && make && sudo make install
 
       - name: Build documentation
         run: cd docs && doxygen
