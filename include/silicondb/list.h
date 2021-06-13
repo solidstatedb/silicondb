@@ -1,3 +1,5 @@
+/// \file
+
 #ifndef SILICONDB_H
 #define SILICONDB_H
 

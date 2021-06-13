@@ -1,3 +1,5 @@
+/// \file
+
 #ifndef SILICONDB_MAP
 #define SILICONDB_MAP
 
