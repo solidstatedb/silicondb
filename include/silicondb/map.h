@@ -11,7 +11,8 @@
 
 namespace silicondb
 {
-    /// map: threadsafe map implemented as lookup table.
+    /// \class map map.h silicondb/map.h
+    /// Threadsafe map implemented as lookup table.
     /// Delegates all locking to silicondb::list
     template <typename Key, typename Value, typename Hash = std::hash<Key>>
     class map
