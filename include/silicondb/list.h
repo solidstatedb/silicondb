@@ -10,8 +10,8 @@ namespace silicondb
 {
     // list: threadsafe implementation of a singly linked list. This is meant to be
     // used as the underlying datastructure for silicondb::map::bucket::data as a
-    // standin replacement for std::list. As a result, we don't provide exhaustive
-    // API for this list implementation.
+    // standin replacement for std::list. As a result, we don't provide an
+    // exhaustive API for this list implementation.
     template <typename T>
     class list
     {
