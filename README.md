@@ -7,6 +7,7 @@ A concurrent key value store, column oriented database and more.
 
 <p align="center">
     <a href="https://github.com/arindas/silicondb/actions"><img src="https://github.com/arindas/silicondb/workflows/build-and-test/badge.svg" alt="Build Status"></a>
+    <a href="https://github.com/arindas/silicondb/actions"><img src="https://github.com/arindas/silicondb/workflows/doxygen-docs/badge.svg" alt="Doxygen docs Publishing Status"></a> 
 </p>
 
 ## Overview
