@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>silicondb: Metrics</title>
+<title>silicondb: silicondb</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,10 +64,71 @@ $(function() {
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Metrics </div>  </div>
+<div class="title">silicondb </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This is a small example that shows how to use doxygen's XML output and the doxmlparser library. The example shows some very basic code metrics. </p>
+<div class="textblock"><p><a class="anchor" id="md__home_runner_work_silicondb_silicondb_README"></a>A concurrent key value store, column oriented database and more.</p>
+<p align="center"></p>
+<p><img src="./assets/logo.jpg" alt="silicondb" width="300" class="inline"/> <br  />
+ </p>
+<p align="center"></p>
+<p><a href="https://github.com/arindas/silicondb/actions"><img src="https://github.com/arindas/silicondb/workflows/build-and-test/badge.svg" alt="Build Status" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/arindas/silicondb/actions"><img src="https://github.com/arindas/silicondb/workflows/doxygen-docs/badge.svg" alt="Doxygen docs Publishing Status" style="pointer-events: none;" class="inline"/></a> </p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Overview</h1>
+<p>silicondb was a project created to understand how modern NoSQL scalable distributed databases work. In particular the author intends to learn implementing lock free data structures, log structured merge trees, column-oriented data storage, merkle trees and data replication at scale.</p>
+<p>This project doesn't aim to compete with existing NoSQL databases, neither does it provided any novel feature addressing a particular pain point. It does however provide implementations of wait-free simulated lock free data structures. (See references)</p>
+<p>However, this project still aims to be a scalable, robust alternative to modern databases with production level code.</p>
+<p>silicondb prioritizes efficiency on SSDs. Hence we focus on log structured merge trees as the driving data storage data structure instead of b-trees.</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+💻 Storage Engine modules</h1>
+<ul>
+<li>[x] A concurrent in memory map implemented as a hashtable.</li>
+<li>[ ] A lock-free variant of the map mentioned above.</li>
+<li>[ ] A wait-free simulation of the lock-free map.</li>
+<li>[ ] A lock-free concurrent SSTable simulated in a wait-free manner.</li>
+<li>[ ] Compaction operations on SSTable.</li>
+<li>[ ] Column oriented storage support. (Needs further elaboration)</li>
+<li>[ ] Content correctness verification and replication using merkle trees for SSTable and Column oriented storage.</li>
+<li>[ ] Message sequencing with merkle trees.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md3"></a>
+🏂 Features</h1>
+<ul>
+<li>[ ] Partial implementation of the Redis protocol:<ul>
+<li>[ ] Key, Value retreival</li>
+<li>[ ] Key Ranged operations</li>
+</ul>
+</li>
+<li>[ ] REST API server for accessing data.</li>
+<li>[ ] CAP compliant.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md4"></a>
+🏗️ Build Instructions</h1>
+<h2><a class="anchor" id="autotoc_md5"></a>
+Pre-requisites</h2>
+<ul>
+<li>gcc-9.3+</li>
+<li>cmake</li>
+</ul>
+<div class="fragment"><div class="line">git clone git@github.com:arindas/silicondb.git</div>
+<div class="line">cd silicondb</div>
+<div class="line">cmake -S . -B build/</div>
+</div><!-- fragment --><p>This produces a binary <code>build/silicondb</code> which is the silicondb daemon server.</p>
+<h1><a class="anchor" id="autotoc_md6"></a>
+🧪 Testing</h1>
+<div class="fragment"><div class="line">cd build &amp;&amp; ctest</div>
+</div><!-- fragment --><p>This should run all tests.</p>
+<h1><a class="anchor" id="autotoc_md7"></a>
+License</h1>
+<p><code>silicondb</code> is licensed under the MIT License See <a href="./LICENSE">LICENSE</a> for the full license text.</p>
+<p><a href="https://app.fossa.io/projects/git%2Bgithub.com%2Farindas%2Fsilicondb?ref=badge_large"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Farindas%2Fsilicondb.svg?type=large" alt="FOSSA Status" style="pointer-events: none;" class="inline"/></a></p>
+<h1><a class="anchor" id="autotoc_md8"></a>
+📖 References</h1>
+<ul>
+<li>[Book] C++ Concurrency in Action - Anthony Williams - Manning Publications. ISBN: 978-1-933-98877-1</li>
+<li>[Book] Designing Data Intensive Applications - Martin Kleppmann - Oreilly. ISBN: 978-1-449-37332-0</li>
+<li>[Paper] A Practical Wait-Free Simulation for Lock-Free Data Structures <a href="http://dx.doi.org/10.1145/2555243.2555261">http://dx.doi.org/10.1145/2555243.2555261</a> </li>
+</ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
