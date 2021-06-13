@@ -12,8 +12,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       
+      - name: Download doxygen binaries
+        run: wget https://webwerks.dl.sourceforge.net/project/doxygen/rel-1.9.1/doxygen-1.9.1.linux.bin.tar.gz
+      
+      - name: Extract archive
+        run: tar xzf doxygen-1.9.1.linux.bin.tar.gz
+      
       - name: Install doxygen
-        run: sudo apt install doxygen
+        run: cd doxygen-1.9.1 && ./configure --prefix /usr/bin && sudo make install 
 
       - name: Build documentation
         run: cd docs && doxygen
