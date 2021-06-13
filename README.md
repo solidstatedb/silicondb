@@ -2,7 +2,7 @@
 A concurrent key value store, column oriented database and more.
 
 <p align="center">
-    <img src="./.github/logo.jpg" alt="silicondb" width="300" />   
+    <img src="./assets/logo.jpg" alt="silicondb" width="300" />   
 </p>
 
 <p align="center">
