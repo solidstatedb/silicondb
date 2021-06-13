@@ -75,6 +75,8 @@ $(function() {
 <div class="title">silicondb::list&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="list_8h_source.html">silicondb/list.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -96,7 +98,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5451e6bdd9f6958fa8523d74f0b05378"><td class="memTemplItemLeft" align="right" valign="top">std::shared_ptr&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsilicondb_1_1list.html#a5451e6bdd9f6958fa8523d74f0b05378">find_first_if</a> (Predicate p)</td></tr>
 <tr class="separator:a5451e6bdd9f6958fa8523d74f0b05378"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename T&gt;<br />
+class silicondb::list&lt; T &gt;</h3>
+
+<p>Threadsafe implementation of a singly linked list. This is meant to be used as the underlying datastructure for silicondb::map::bucket::data as a standin replacement for std::list. As a result, we don't provide an exhaustive API for this list implementation. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a5451e6bdd9f6958fa8523d74f0b05378"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5451e6bdd9f6958fa8523d74f0b05378">&#9670;&nbsp;</a></span>find_first_if()</h2>
 
