@@ -9,9 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      
       - name: Download doxygen sources
         run: wget https://doxygen.nl/files/doxygen-1.9.3.src.tar.gz
       
@@ -24,6 +21,9 @@ jobs:
           make && sudo make install
           cd .. && rm -rf doxygen-1.9.3
 
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
       - name: Build documentation
         run: cd docs && doxygen
 
