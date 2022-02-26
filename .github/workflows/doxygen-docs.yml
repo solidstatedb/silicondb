@@ -22,6 +22,7 @@ jobs:
           mkdir build && cd build
           cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -Wno-dev ..
           make && sudo make install
+          cd .. && rm -rf doxygen-1.9.3
 
       - name: Build documentation
         run: cd docs && doxygen
