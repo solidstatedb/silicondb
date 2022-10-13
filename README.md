@@ -12,18 +12,19 @@ A concurrent key value store, column oriented database and more.
 
 ## Overview
 
-silicondb was a project created to understand how modern NoSQL scalable distributed databases work. In particular
-the author intends to learn implementing lock free data structures, log structured merge trees,
-column-oriented data storage, merkle trees and data replication at scale.
+silicondb was a project created to understand how modern NoSQL scalable distributed databases work. In particular, the author 
+intends to learn how to implement lock-free data structures, log-structured merge trees, column-oriented data storage, Merkle 
+trees and data replication at scale.
 
-This project doesn't aim to compete with existing NoSQL databases, neither does it provided any novel feature
-addressing a particular pain point. It does however provide implementations of wait-free simulated lock free
-data structures. (See references)
+This project doesn't aim to compete with existing NoSQL databases and does not provide any novel feature addressing a 
+particular pain point. However, we plan to provide implementations of wait-free simulated lock-free data structures. 
+(See references) This project aims to be a scalable, robust alternative to modern databases with production-level code.
 
-However, this project still aims to be a scalable, robust alternative to modern databases with production level code.
+silicondb prioritizes efficiency on SSDs. Hence we focus on log-structured merge trees as the driving data-storage 
+data structure instead of b-trees.
 
-silicondb prioritizes efficiency on SSDs. Hence we focus on log structured merge trees as the driving data
-storage data structure instead of b-trees.
+Apart from [API Documentation](https://solidstatedb.github.io/silicondb/), we describe the implementation of certain 
+aspects of silicondb in the [Wiki](https://github.com/solidstatedb/silicondb/wiki).
 
 ## 💻 Storage Engine modules
 
